@@ -9,14 +9,16 @@
 
 #include "tcp.h"
 #define TAM 200
+#define TIMEOUT 100000
 
 using namespace std;
 
-static int width  = 1024;
+static int width  = 1280;
 static int height = 768;
 static int port   = 9500;
-static string ip  = "10.1.72.213";
-bool salir,shift,caps = false;
+static string ip  = "192.168.1.130";
+bool salir,shift,caps,mouseMoved = false;
+float x=0,y=0,timer = 0;
 
 void sendMessage(string mens){
 	cout << "sending: " << mens << endl;
@@ -49,10 +51,24 @@ void sendCommonKey(string key){
 	sendMessage(msg.str());
 }
 
-void sendMouseClick(float x,float y){
+void sendMouseClick(float x,float y,string button){
 
 	stringstream msg;
-	msg << "MouseClick(\"left\", ";
+	msg << "MouseClick(\"";
+	msg << button;
+	msg << "\", ";
+	msg << x;
+	msg << ", ";
+	msg << y;
+	msg << ")\n";
+
+	sendMessage(msg.str());
+}
+
+void sendMouseMotion(float x,float y){
+
+	stringstream msg;
+	msg << "MouseMove(";
 	msg << x;
 	msg << ", ";
 	msg << y;
@@ -76,12 +92,29 @@ void handleImput(){
 				}
 			break;  
 
+	    		case SDL_MOUSEMOTION: 
+			{
+				x = event.button.x;
+				y = event.button.y;
+
+				if(caps)
+					mouseMoved = true;
+			}
+			break;
+
+
 	    		case SDL_MOUSEBUTTONDOWN: 
 			{
-				float x = event.button.x;
-				float y = event.button.y;
+				x = event.button.x;
+				y = event.button.y;
+				mouseMoved = false;
 
-				sendMouseClick(x,y);
+				if(SDL_GetMouseState(NULL,NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
+					sendMouseClick(x,y,"left");
+				else
+					if(SDL_GetMouseState(NULL,NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))
+						sendMouseClick(x,y,"right");
+				
 			}
 			break;
 
@@ -445,11 +478,22 @@ int main(){
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
                           width, height,SDL_WINDOW_OPENGL);
-
+	SDL_Surface *surf = SDL_GetWindowSurface(screen);
+	SDL_FillRect(surf,NULL,SDL_MapRGB(surf->format,0xFF,0xFF,0xFF));
 
 	salir = false;
 	while(!salir){
 		handleImput();
+
+		if(timer > TIMEOUT ){
+			SDL_UpdateWindowSurface(screen);
+			if(mouseMoved){
+				sendMouseMotion(x,y);
+				mouseMoved = false;
+			}
+			timer = 0;
+		}
+		timer++;
 	}
 	SDL_Delay(2000);
 	SDL_Quit();
