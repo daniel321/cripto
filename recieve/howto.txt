@@ -1,0 +1,12 @@
+-instalar java
+-agregar variable de entorno de java (la carpeta bin del jre)
+-instalar Autoit3
+-hacer acceso directo de Autoit3.exe y moverlo a la carpeta (reemplazar "AutoIt3")
+-corregir puertos/ips
+-corregir los paths
+
+-abrir cmd
+-cls
+-cd Desktop/recieve
+-javac Main.java
+-java Main
