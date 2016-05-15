@@ -1,1 +1,0 @@
-MouseClick("left", 939, 256)

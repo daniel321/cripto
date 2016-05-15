@@ -3,8 +3,10 @@ import java.net.*;
 import java.nio.file.*;
 
 class Impl {
-	public static final String path = "C:\\Users\\daniel\\Desktop\\recieve\\test.au3";
-	public static final String cmdLine = "C:\\Users\\daniel\\Desktop\\recieve\\AutoIt3.lnk C:\\Users\\daniel\\Desktop\\recieve\\test.au3";
+	public static final String path     = "C:\\ProgramData\\recieve\\test.au3";
+	public static final String progPath = "C:\\ProgramData\\recieve\\AutoIt3.lnk";
+	
+	public static final String cmdLine = progPath + " " + path;
 	public static final int port = 9500;	
 	
 	public void test(){
@@ -69,14 +71,12 @@ class Impl {
         catch (IOException e) {
            System.out.println(e);
         }   
-
+		
 		while(true){
 			try {
 				clientSocket = serverSock.accept();
 				line = new DataInputStream(clientSocket.getInputStream()).readLine();
-				ejecutarLinea(line);
-				//System.out.println(line);
-				
+				ejecutarLinea(line);	
 				clientSocket.close();
 			}   
 			catch (IOException e) {

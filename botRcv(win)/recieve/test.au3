@@ -1,0 +1,1 @@
+MouseClick("left", 579, 208)
