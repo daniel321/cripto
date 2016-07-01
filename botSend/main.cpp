@@ -16,30 +16,28 @@ using namespace std;
 static int width  = 1280;
 static int height = 768;
 static int port   = 9500;
-static string ip  = "192.168.1.130";
+static string ip  = "192.168.1.132";
+static string ip2  = "192.168.1.129";
+static string ip3  = "127.0.0.1";
+static string ip4  = "10.1.135.153";
+
 bool salir,shift,caps,mouseMoved = false;
 float x=0,y=0,timer = 0;
 
-void sendMessage(string mens){
+void send(string mens,string dest){
 	cout << "sending: " << mens << endl;
-
-	int socket = tcp_open_activo(ip.c_str(),port);
-	cout << "sent" << endl;
+	int socket = tcp_open_activo(dest.c_str(),port);
 	
 	if(socket > 0){
 		write(socket,mens.c_str(),TAM);
 		close(socket);
 	}
-
 }
 
-void sendSpecialKey(string key){
-	stringstream msg;
-	msg << "Send(\"{";
-	msg << key;
-	msg << "}\")";
-
-	sendMessage(msg.str());
+void sendMessage(string mens){
+	send(mens,ip4);
+//	send(mens,ip2);
+//	send(mens,ip3);
 }
 
 void sendCommonKey(string key){
@@ -51,8 +49,16 @@ void sendCommonKey(string key){
 	sendMessage(msg.str());
 }
 
-void sendMouseClick(float x,float y,string button){
+void sendSpecialKey(string key){
+	stringstream msg;
+	msg << "Send(\"{";
+	msg << key;
+	msg << "}\")";
 
+	sendMessage(msg.str());
+}
+
+void sendMouseClick(float x,float y,string button){
 	stringstream msg;
 	msg << "MouseClick(\"";
 	msg << button;
@@ -77,6 +83,12 @@ void sendMouseMotion(float x,float y){
 	sendMessage(msg.str());
 }
 
+void sendOpenProgramOrder(string program){
+	sendCommonKey("#r");
+	sendSpecialKey("BACKSPACE");
+	sendCommonKey(program);
+	sendSpecialKey("ENTER");	
+}
 
 void handleImput(){
 	SDL_Event event;
@@ -122,6 +134,33 @@ void handleImput(){
 				int keyPressed = event.key.keysym.sym;
 
 			   	switch (keyPressed){
+				   case SDLK_F1:
+				      sendOpenProgramOrder("cmd");	
+				      break;
+				   case SDLK_F2:
+				      sendOpenProgramOrder("Firefox");	
+				      break;
+				   case SDLK_F3:
+				      sendOpenProgramOrder("Chrome");	
+				      break;
+				   case SDLK_F4:
+				      sendOpenProgramOrder("Notepad++");	
+				      break;
+				   case SDLK_F5:
+				      sendOpenProgramOrder("wordpad");	
+				      break;
+
+				   case SDLK_F7:
+				      sendCommonKey("Soy Dios {ENTER}");	
+				      break;
+				   case SDLK_F8:
+				      sendCommonKey("Juana...");	
+				      break;
+				   case SDLK_F9:
+				      sendCommonKey("dame tu postre");	
+				      break;
+
+
 				   case SDLK_LEFT:
 				      sendSpecialKey("LEFT");	
 				      break;
