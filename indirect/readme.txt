@@ -10,10 +10,5 @@ mover el jar a la carpeta de autoarranque:
 y el contenido de la carpeta recieve a C:\ProgramData\recieve
 
 
-------------------------------------------------------------------
-
-para compilar:
--javac Main.java
-
-crear jar:
-jar cvfe program.jar Main *.class
+para compilar el atacante con el makefile
+para generar los jar usar el eclipse.

@@ -16,6 +16,4 @@ jar cvfe program.jar Main *.class
 --------------------------------------------------------------------------
 atacante:
 
-para compilar:
-g++ main.cpp `pkg-config --cflags --libs sdl2`
-./a.out
+para compilar usar el makefile

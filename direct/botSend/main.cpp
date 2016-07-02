@@ -87,7 +87,11 @@ void sendOpenProgramOrder(string program){
 	sendCommonKey("#r");
 	sendSpecialKey("BACKSPACE");
 	sendCommonKey(program);
-	sendSpecialKey("ENTER");	
+	sendSpecialKey("ENTER");
+	
+	string command;
+	command = "sleep(1000)";
+	sendMessage(command.c_str());
 }
 
 void handleImput(){

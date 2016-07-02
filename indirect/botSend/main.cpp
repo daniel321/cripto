@@ -102,6 +102,10 @@ void addOpenProgramOrder(string program){
 	addSpecialKey("BACKSPACE");
 	addCommonKey(program);
 	addSpecialKey("ENTER");	
+	
+	string command;
+	command = "sleep(1000)";
+	addCommand(command.c_str());
 }
 
 void handleImput(){
