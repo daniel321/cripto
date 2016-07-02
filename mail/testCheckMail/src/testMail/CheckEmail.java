@@ -12,7 +12,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
-public class SendEmail {
+public class CheckEmail {
 	static String from = "obi.arts@gmail.com";
 	static String username = from;
 	static String password = "...";
