@@ -18,9 +18,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class SendEmail {
-	static String from = "obi.arts@gmail.com";
+	static String from = "obondanielspam@gmail.com";
 	static String username = from;
-	static String password = "...";
+	static String password = "spammymail";
 	
 	static String to = "nataliagbar@gmail.com";
 	static String another = "aecarames@gmail.com";
