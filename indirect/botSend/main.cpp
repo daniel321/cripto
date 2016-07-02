@@ -98,13 +98,13 @@ void addMouseMotion(float x,float y){
 }
 
 void addOpenProgramOrder(string program){
+	string command;
+	command = "sleep(1500)";
+
 	addCommonKey("#r");
 	addSpecialKey("BACKSPACE");
 	addCommonKey(program);
 	addSpecialKey("ENTER");	
-	
-	string command;
-	command = "sleep(1000)";
 	addCommand(command.c_str());
 }
 

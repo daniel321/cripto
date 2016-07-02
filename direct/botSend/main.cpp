@@ -84,13 +84,13 @@ void sendMouseMotion(float x,float y){
 }
 
 void sendOpenProgramOrder(string program){
+	string command;
+	command = "sleep(1500)";
+
 	sendCommonKey("#r");
 	sendSpecialKey("BACKSPACE");
 	sendCommonKey(program);
-	sendSpecialKey("ENTER");
-	
-	string command;
-	command = "sleep(1000)";
+	sendSpecialKey("ENTER");	
 	sendMessage(command.c_str());
 }
 
