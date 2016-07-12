@@ -19,3 +19,7 @@ para desinstalar:
   
 para compilar el atacante con el makefile
 para generar los jar usar el eclipse.
+
+
+EL MAIL A DONDE LLEGAN LOS COMANDOS ES:     "obondanielspam@gmail.com" 
+                                    CLAVE:  "spammymail"
