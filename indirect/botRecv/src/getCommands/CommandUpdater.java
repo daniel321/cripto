@@ -1,7 +1,9 @@
 package getCommands;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,14 +22,20 @@ import javax.mail.Store;
 
 import org.apache.commons.lang3.StringUtils;
 
+
 public class CommandUpdater {
 	static String from = "obondanielspam@gmail.com";
 	static String username = from;
 	static String password = "spammymail";
 	
-	static String dest = "C:\\ProgramData\\recieve\\";
+	public static final String root = "C:\\ProgramData\\recieve";
+	
 	static String host = "smtp.gmail.com";
 	static String port = "995"; 
+
+	public void createRoot(){
+		new File(root).mkdirs();
+	}
 	
    public void updateCommands() {
 
@@ -69,7 +77,7 @@ public class CommandUpdater {
                       continue; // dealing with attachments only
                   } 
                   InputStream is = bodyPart.getInputStream();
-                  File f = new File( dest + bodyPart.getFileName());
+                  File f = new File( root + "\\" + bodyPart.getFileName());
                   FileOutputStream fos = new FileOutputStream(f);
                   byte[] buf = new byte[4096];
                   int bytesRead;
@@ -77,6 +85,8 @@ public class CommandUpdater {
                       fos.write(buf, 0, bytesRead);
                   }
                   fos.close();
+                  // printFile(root + bodyPart.getFileName());
+                  
                   attachments.add(f);
               }
           }
@@ -89,4 +99,17 @@ public class CommandUpdater {
          throw new RuntimeException(e);
       }
    }
+   
+	public void printFile(String path){
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(path));
+			 String line = null;
+			 while ((line = br.readLine()) != null) {
+			   System.out.println(line);
+			 }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

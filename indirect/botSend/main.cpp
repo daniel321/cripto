@@ -97,15 +97,18 @@ void addMouseMotion(float x,float y){
 	addCommand(msg.str());
 }
 
-void addOpenProgramOrder(string program){
+void addDelay(){
 	string command;
-	command = "sleep(1500)";
+	command = "sleep(5000)";
+	addCommand(command.c_str());
+}
 
+void addOpenProgramOrder(string program){
 	addCommonKey("#r");
 	addSpecialKey("BACKSPACE");
 	addCommonKey(program);
 	addSpecialKey("ENTER");	
-	addCommand(command.c_str());
+	addDelay();
 }
 
 void handleImput(){
@@ -159,13 +162,17 @@ void handleImput(){
 				      addOpenProgramOrder("Firefox");	
 				      break;
 				   case SDLK_F3:
-				      addOpenProgramOrder("Chrome");	
+				      addOpenProgramOrder("Chrome google.com");	
 				      break;
 				   case SDLK_F4:
 				      addOpenProgramOrder("Notepad++");	
 				      break;
 				   case SDLK_F5:
 				      addOpenProgramOrder("wordpad");	
+				      break;
+
+				   case SDLK_F6:
+					addDelay();
 				      break;
 
 				   case SDLK_F7:

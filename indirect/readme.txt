@@ -1,14 +1,11 @@
 victima:
 
--instalar Autoit3
--hacer acceso directo de Autoit3.exe y moverlo a la carpeta recieve (reemplazar "AutoIt3")
-
-mover el jar a la carpeta de autoarranque: 
-- menu run
-- shell:startup   
-  
-y el contenido de la carpeta recieve a C:\ProgramData\recieve
-
+instalar:
+- instalar Autoit3
+- instalar jre
+- correr el install.bat en modo administrador 
+  (-program.jar tiene que estar en la misma carpeta
+   -Autoit3 tiene que estar instalado en "C:\Program Files (x86)\AutoIt3" (default) )
 
 para compilar el atacante con el makefile
 para generar los jar usar el eclipse.
