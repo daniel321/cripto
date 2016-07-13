@@ -1,12 +1,16 @@
+BUILD = build/
+EXECUTABLE = botSend
+
 CC     = g++
 CFLAGS = -Wall -g
 
-all: client
+OUTFILE = $(BUILD)$(EXECUTABLE)
 
-client: main.cpp
-	g++ main.cpp `pkg-config --cflags --libs sdl2`
+all: $(OUTFILE)
+
+$(OUTFILE): main.cpp
+	mkdir -p $(BUILD)
+	$(CXX) main.cpp `pkg-config --cflags --libs sdl2`  -o $(OUTFILE)
 
 clean:
-	rm -f *.o
-	rm -f $(PROG)
-
+	rm -rf $(BUILD)

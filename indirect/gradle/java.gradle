@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+	jcenter()
+}
+
+task fatJar(type: Jar) {
+	manifest = project.jar.manifest
+	archiveName = "${project.name}.jar"
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
+build.dependsOn fatJar
+
+task copyOutput(type: Copy) {
+	from fatJar
+	into "${rootDir}/deploy"
+}
+build.finalizedBy copyOutput

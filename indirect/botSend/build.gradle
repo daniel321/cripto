@@ -1,0 +1,16 @@
+group 'cripto.botSend'
+version '1.0'
+
+task build(type: Exec, overwrite: true) {
+	commandLine 'make'
+}
+
+task copyOutput(type: Copy) {
+	from "${projectDir}/build"
+	into "${rootDir}/deploy"
+}
+build.finalizedBy copyOutput
+
+task clean(type: Exec, overwrite: true) {
+	commandLine 'make', 'clean'
+}

@@ -17,8 +17,10 @@ para desinstalar:
    - No desinstala el Autoit3 ni el jre solo para el programa y borra todos los archivos.
   }   
   
-para compilar el atacante con el makefile
-para generar los jar usar el eclipse.
+El proceso de build require:
+- jdk (>= 7)
+- make, g++ y libsdl2 para el atacante
+Se inicia invocando 'gradlew build' (completo) o 'gradlew :botRecv:build' (solo victima)
 
 
 EL MAIL A DONDE LLEGAN LOS COMANDOS ES:     "obondanielspam@gmail.com" 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="lib/activation.jar"/>
-	<classpathentry kind="lib" path="lib/javax.mail-1.5.5.jar"/>
-	<classpathentry kind="lib" path="lib/common-lang3.jar"/>
-	<classpathentry kind="lib" path="lib/jshortcut-0.4.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry path="bin" kind="output"/>
+	<classpathentry path="src/main/java" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7/" kind="con"/>
+	<classpathentry path="/home/agustin/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.1/905075e6c80f206bbe6cf1e809d2caa69f420c76/commons-lang3-3.1.jar" kind="lib" sourcepath="/home/agustin/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.1/8d30b90ae8bda4fbac8363161c8a9b5a99e23baf/commons-lang3-3.1-sources.jar"/>
+	<classpathentry path="/home/agustin/.gradle/caches/modules-2/files-2.1/javax.mail/javax.mail-api/1.5.2/5313d5b0dc708366de7f241de46ee17f17b92143/javax.mail-api-1.5.2.jar" kind="lib" sourcepath="/home/agustin/.gradle/caches/modules-2/files-2.1/javax.mail/javax.mail-api/1.5.2/391608d66e79f9f99aba74618b132976f9c7ee64/javax.mail-api-1.5.2-sources.jar"/>
+	<classpathentry path="/home/agustin/.gradle/caches/modules-2/files-2.1/com.sun.mail/javax.mail/1.5.2/ad1027a3d832bb7f34b4b9afeed760ca8eaa12f/javax.mail-1.5.2.jar" kind="lib" sourcepath="/home/agustin/.gradle/caches/modules-2/files-2.1/com.sun.mail/javax.mail/1.5.2/e63057a5d10d5f48ce5baf942edccc402bb7560/javax.mail-1.5.2-sources.jar"/>
+	<classpathentry path="/home/agustin/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1/e6cb541461c2834bdea3eb920f1884d1eb508b50/activation-1.1.jar" kind="lib" sourcepath="/home/agustin/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1/3697e9f67a2ed7ac5f589cff30f21173299440/activation-1.1-sources.jar"/>
+	<classpathentry path="/home/agustin/code/active/6669/repo/indirect/gradle/dependencies/jshortcut-0.4.jar" kind="lib"/>
 </classpath>

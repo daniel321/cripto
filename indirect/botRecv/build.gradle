@@ -1,0 +1,21 @@
+group 'cripto.botRecv'
+version '1.0'
+
+apply from: "${rootDir}/gradle/java.gradle"
+
+jar {
+    manifest {
+        attributes(
+        	'Implementation-Title': 'Ehhh',
+                'Implementation-Version': version,
+                'Main-Class': 'main.Main'
+        )
+    }
+}
+
+dependencies {
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+	compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.2'
+        compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.2'
+        compile fileTree(dir: "${rootDir}/gradle/dependencies", include: ['*.jar'])
+}
