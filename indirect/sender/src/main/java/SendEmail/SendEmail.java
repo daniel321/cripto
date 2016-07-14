@@ -25,7 +25,7 @@ public class SendEmail {
 	static String to = "obondanielspam@gmail.com";
 
 	static String name = "test.au3";
-	static String path = "/home/daniel/workspace/cripto/indirect/botSend/" + name; 
+	static String path = name; 
 	
 	static String host = "smtp.gmail.com";
 	static String port = "587"; // "25";
