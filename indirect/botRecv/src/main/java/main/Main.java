@@ -18,15 +18,19 @@ public class Main {
 			try {
 				System.out.printf("dormido\n");
 				Thread.sleep(tsleep * 1000); // 1000 milliseconds is one second.
-				manager.commandClean();
-			} catch (InterruptedException ex) {
+			} catch (Exception e) {
 				Thread.currentThread().interrupt();
 			}
 
-			System.out.printf("despierto\n");
-			updater.updateCommands();
-			// manager.printCommand();
-			manager.commandRun();
+			try {
+				System.out.printf("despierto\n");
+				manager.commandClean();
+				updater.updateCommands();
+				// manager.printCommand();
+				manager.commandRun();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
