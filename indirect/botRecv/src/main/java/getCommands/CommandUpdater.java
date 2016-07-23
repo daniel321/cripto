@@ -2,13 +2,11 @@ package getCommands;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -104,9 +102,7 @@ public class CommandUpdater {
 	}
 
 	public void printFile(String path) {
-		BufferedReader br;
-		try {
-			br = new BufferedReader(new FileReader(path));
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -117,39 +113,27 @@ public class CommandUpdater {
 	}
 
 	public Date readDate(String path) {
-		BufferedReader br;
-		Date date = null;
-
-		try {
-			br = new BufferedReader(new FileReader(path));
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String line = br.readLine();
 			if (line != null) {
-				date = new Date(Long.parseLong(line));
+				return new Date(Long.parseLong(line));
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
-		return date;
+		return lastDate;
 	}
 
-	public void writeDate(String path, Date date) {
+	public void writeDate(String path, Date date) throws IOException {
 		cleanDate(path);
-		try {
-			PrintWriter out = new PrintWriter(path);
+		try (PrintWriter out = new PrintWriter(path)) {
 			out.println(date.getTime());
-			out.close();
-		} catch (FileNotFoundException e) {
 		}
 	}
 
-	@SuppressWarnings("resource")
-	public void cleanDate(String path) {
-		FileChannel outChan = null;
-		try {
-			outChan = new FileOutputStream(path, true).getChannel();
-			outChan.truncate(0);
-			outChan.close();
-		} catch (IOException e) {
+	public void cleanDate(String path) throws IOException {
+		try (FileOutputStream out = new FileOutputStream(path, true)) {
+			out.getChannel().truncate(0);
 		}
 	}
 }

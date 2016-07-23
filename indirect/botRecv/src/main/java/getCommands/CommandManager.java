@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 
 public class CommandManager {
 	public static final String root = "C:\\ProgramData\\recieve";
@@ -36,14 +35,9 @@ public class CommandManager {
 		}
 	}
 
-	@SuppressWarnings("resource")
-	public void commandClean() {
-		FileChannel outChan = null;
-		try {
-			outChan = new FileOutputStream(path, true).getChannel();
-			outChan.truncate(0);
-			outChan.close();
-		} catch (IOException e) {
+	public void commandClean() throws IOException {
+		try (FileOutputStream str = new FileOutputStream(path, true)) {
+			str.getChannel().truncate(0);
 		}
 	}
 }
