@@ -19,3 +19,9 @@ dependencies {
         compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.2'
         compile fileTree(dir: "${rootDir}/gradle/dependencies", include: ['*.jar'])
 }
+
+task copyOutput(type: Copy) {
+	from fatJar
+	into "${rootDir}/deploy/receiver"
+}
+build.finalizedBy copyOutput

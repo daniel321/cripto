@@ -17,3 +17,9 @@ dependencies {
 	compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.2'
         compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.2'
 }
+
+task copyOutput(type: Copy) {
+	from fatJar
+	into "${rootDir}/deploy/sender"
+}
+build.finalizedBy copyOutput

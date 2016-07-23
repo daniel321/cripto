@@ -16,9 +16,3 @@ task fatJar(type: Jar) {
 	with jar
 }
 build.dependsOn fatJar
-
-task copyOutput(type: Copy) {
-	from fatJar
-	into "${rootDir}/deploy"
-}
-build.finalizedBy copyOutput

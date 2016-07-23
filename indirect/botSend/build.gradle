@@ -7,7 +7,7 @@ task build(type: Exec, overwrite: true) {
 
 task copyOutput(type: Copy) {
 	from "${projectDir}/build"
-	into "${rootDir}/deploy"
+	into "${rootDir}/deploy/sender"
 }
 build.finalizedBy copyOutput
 
