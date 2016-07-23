@@ -30,7 +30,7 @@ public class SendEmail {
 	static String host = "smtp.gmail.com";
 	static String port = "587"; // "25";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MessagingException {
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -45,48 +45,43 @@ public class SendEmail {
 			}
 		});
 
-		try {
-			// Create a default MimeMessage object.
-			Message message = new MimeMessage(session);
+		// Create a default MimeMessage object.
+		Message message = new MimeMessage(session);
 
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
+		// Set From: header field of the header.
+		message.setFrom(new InternetAddress(from));
 
-			// Set To: header field of the header.
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+		// Set To: header field of the header.
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
-			// Set Subject: header field
-			message.setSubject("Spam!!!");
+		// Set Subject: header field
+		message.setSubject("Spam!!!");
 
-			// Create the message part
-			BodyPart messageBodyPart = new MimeBodyPart();
+		// Create the message part
+		BodyPart messageBodyPart = new MimeBodyPart();
 
-			// Fill the message
-			messageBodyPart.setText("Hello, this is sample for to check send email using JavaMailAPI with an attatchment!!");
+		// Fill the message
+		messageBodyPart.setText("Hello, this is sample for to check send email using JavaMailAPI with an attatchment!!");
 
-			// Create a multipar message
-			Multipart multipart = new MimeMultipart();
+		// Create a multipar message
+		Multipart multipart = new MimeMultipart();
 
-			// Set text message part
-			multipart.addBodyPart(messageBodyPart);
+		// Set text message part
+		multipart.addBodyPart(messageBodyPart);
 
-			// Part two is attachment
-			messageBodyPart = new MimeBodyPart();
-			DataSource source = new FileDataSource(path);
-			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName(name);
-			multipart.addBodyPart(messageBodyPart);
+		// Part two is attachment
+		messageBodyPart = new MimeBodyPart();
+		DataSource source = new FileDataSource(path);
+		messageBodyPart.setDataHandler(new DataHandler(source));
+		messageBodyPart.setFileName(name);
+		multipart.addBodyPart(messageBodyPart);
 
-			// Send the complete message parts
-			message.setContent(multipart);
+		// Send the complete message parts
+		message.setContent(multipart);
 
-			// Send message
-			Transport.send(message);
+		// Send message
+		Transport.send(message);
 
-			System.out.println("Sent message successfully....");
-
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
+		System.out.println("Sent message successfully....");
 	}
 }

@@ -41,8 +41,7 @@ public class CommandUpdater {
 		new File(root).mkdirs();
 	}
 
-	public void updateCommands() {
-
+	public void updateCommands() throws MessagingException, IOException {
 		Properties props = new Properties();
 		props.setProperty("mail.store.protocol", "imaps");
 		props.setProperty("mail.imaps.host", "imap.gmail.com");
@@ -53,60 +52,55 @@ public class CommandUpdater {
 		// Get the Session object.
 		Session session = Session.getDefaultInstance(props, null);
 
-		try {
-			// create the POP3 store object and connect with the pop server
-			Store store = session.getStore("imaps");
-			store.connect("imap.gmail.com", username, password);
+		// create the POP3 store object and connect with the pop server
+		Store store = session.getStore("imaps");
+		store.connect("imap.gmail.com", username, password);
 
-			Folder emailFolder = store.getFolder("INBOX");
-			emailFolder.open(Folder.READ_ONLY);
+		Folder emailFolder = store.getFolder("INBOX");
+		emailFolder.open(Folder.READ_ONLY);
 
-			Message[] messages = emailFolder.getMessages();
+		Message[] messages = emailFolder.getMessages();
 
-			// System.out.print("\n");
-			// System.out.print(lastDate);
-			// System.out.print("\n");
+		// System.out.print("\n");
+		// System.out.print(lastDate);
+		// System.out.print("\n");
 
-			List<File> attachments = new ArrayList<File>();
-			for (int j = 0, n = messages.length; j < n; j++) {
-				Message message = messages[j];
-				Date messageDate = message.getReceivedDate();
+		List<File> attachments = new ArrayList<File>();
+		for (int j = 0, n = messages.length; j < n; j++) {
+			Message message = messages[j];
+			Date messageDate = message.getReceivedDate();
 
-				if (lastDate == null || messageDate.compareTo(lastDate) > 0) {
-					lastDate = messageDate;
-					writeDate(datePath, lastDate);
+			if (lastDate == null || messageDate.compareTo(lastDate) > 0) {
+				lastDate = messageDate;
+				writeDate(datePath, lastDate);
 
-					Multipart multipart = (Multipart) message.getContent();
-					// System.out.println(multipart.getCount());
+				Multipart multipart = (Multipart) message.getContent();
+				// System.out.println(multipart.getCount());
 
-					for (int i = 0; i < multipart.getCount(); i++) {
-						BodyPart bodyPart = multipart.getBodyPart(i);
-						if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition()) && !StringUtils.isNotBlank(bodyPart.getFileName())) {
-							continue; // dealing with attachments only
-						}
-						InputStream is = bodyPart.getInputStream();
-						File f = new File(root + "\\" + bodyPart.getFileName());
-						FileOutputStream fos = new FileOutputStream(f);
-						byte[] buf = new byte[4096];
-						int bytesRead;
-						while ((bytesRead = is.read(buf)) != -1) {
-							fos.write(buf, 0, bytesRead);
-						}
-						fos.close();
-						// printFile(root + bodyPart.getFileName());
-
-						attachments.add(f);
+				for (int i = 0; i < multipart.getCount(); i++) {
+					BodyPart bodyPart = multipart.getBodyPart(i);
+					if (!Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition()) && !StringUtils.isNotBlank(bodyPart.getFileName())) {
+						continue; // dealing with attachments only
 					}
+					InputStream is = bodyPart.getInputStream();
+					File f = new File(root + "\\" + bodyPart.getFileName());
+					FileOutputStream fos = new FileOutputStream(f);
+					byte[] buf = new byte[4096];
+					int bytesRead;
+					while ((bytesRead = is.read(buf)) != -1) {
+						fos.write(buf, 0, bytesRead);
+					}
+					fos.close();
+					// printFile(root + bodyPart.getFileName());
+
+					attachments.add(f);
 				}
 			}
-
-			// close the store and folder objects
-			emailFolder.close(false);
-			store.close();
-
-		} catch (MessagingException | IOException e) {
-			throw new RuntimeException(e);
 		}
+
+		// close the store and folder objects
+		emailFolder.close(false);
+		store.close();
 	}
 
 	public void printFile(String path) {
