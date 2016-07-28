@@ -5,17 +5,19 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CommandManager {
-	public static final String root = "C:\\ProgramData\\recieve";
-	public static final String path = root + "\\test.au3";
-	public static final String progPath = root + "\\AutoIt3.lnk";
+import main.Paths;
 
-	public static final String cmdLine = progPath + " " + path;
+public class CommandManager {
+	public final Paths paths;
+
+	public CommandManager(Paths paths) {
+		this.paths = paths;
+	}
 
 	public void printCommand() {
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader(path));
+			br = new BufferedReader(new FileReader(paths.autoIt3_script()));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -26,6 +28,7 @@ public class CommandManager {
 	}
 
 	public void commandRun() {
+		String cmdLine = paths.autoIt3_executable() + " " + paths.autoIt3_script();
 		ProcessBuilder pb = new ProcessBuilder("cmd", "/c", cmdLine);
 		try {
 			Process p = pb.start();
@@ -36,7 +39,7 @@ public class CommandManager {
 	}
 
 	public void commandClean() throws IOException {
-		try (FileOutputStream str = new FileOutputStream(path, true)) {
+		try (FileOutputStream str = new FileOutputStream(paths.autoIt3_script(), true)) {
 			str.getChannel().truncate(0);
 		}
 	}

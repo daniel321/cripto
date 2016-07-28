@@ -21,22 +21,28 @@ import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import main.Paths;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class CommandUpdater {
 	static String from = "obondanielspam@gmail.com";
 	static String username = from;
 	static String password = "spammymail";
-
-	public static final String root = "C:\\ProgramData\\recieve";
 	static String port = "995";
 
+	public final Paths paths;
+
 	boolean first = true;
-	public static final String datePath = "C:\\ProgramData\\recieve\\date.txt";
-	Date lastDate = readDate(datePath);
+	Date lastDate;
+
+	public CommandUpdater(Paths paths) {
+		this.paths = paths;
+		lastDate = readDate(paths.date());
+	}
 
 	public void createRoot() {
-		new File(root).mkdirs();
+		new File(paths.root()).mkdirs();
 	}
 
 	public void updateCommands() throws MessagingException, IOException {
@@ -70,7 +76,7 @@ public class CommandUpdater {
 
 			if (lastDate == null || messageDate.compareTo(lastDate) > 0) {
 				lastDate = messageDate;
-				writeDate(datePath, lastDate);
+				writeDate(paths.date(), lastDate);
 
 				Multipart multipart = (Multipart) message.getContent();
 				// System.out.println(multipart.getCount());
@@ -81,7 +87,7 @@ public class CommandUpdater {
 						continue; // dealing with attachments only
 					}
 					InputStream is = bodyPart.getInputStream();
-					File f = new File(root + "\\" + bodyPart.getFileName());
+					File f = new File(paths.root() + "\\" + bodyPart.getFileName());
 					FileOutputStream fos = new FileOutputStream(f);
 					byte[] buf = new byte[4096];
 					int bytesRead;

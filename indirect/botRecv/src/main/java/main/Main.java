@@ -11,8 +11,13 @@ public class Main {
 	static int tsleep = 5;
 
 	public static void main(String[] args) throws MessagingException, IOException {
-		CommandManager manager = new CommandManager();
-		CommandUpdater updater = new CommandUpdater();
+		Paths paths = new Paths("C:\\ProgramData\\recieve");
+		if (args.length != 0) {
+			paths = new Paths(args[0]);
+		}
+		
+		CommandManager manager = new CommandManager(paths);
+		CommandUpdater updater = new CommandUpdater(paths);
 
 		while (true) {
 			try {
