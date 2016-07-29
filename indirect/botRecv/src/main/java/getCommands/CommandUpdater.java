@@ -32,8 +32,6 @@ public class CommandUpdater {
 	static String port = "995";
 
 	public final Paths paths;
-
-	boolean first = true;
 	Date lastDate;
 
 	public CommandUpdater(Paths paths) {
@@ -125,7 +123,7 @@ public class CommandUpdater {
 				return new Date(Long.parseLong(line));
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return lastDate;
 	}

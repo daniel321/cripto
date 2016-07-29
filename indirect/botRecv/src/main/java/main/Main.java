@@ -8,7 +8,7 @@ import getCommands.CommandManager;
 import getCommands.CommandUpdater;
 
 public class Main {
-	static int tsleep = 5;
+	static int tsleep = 3;
 
 	public static void main(String[] args) throws MessagingException, IOException {
 		Paths paths = new Paths("C:\\ProgramData\\recieve");
