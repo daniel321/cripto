@@ -7,17 +7,13 @@
 #include <stdlib.h>     /* system, NULL, EXIT_FAILURE */
 
 #define TAM 200
-#define TIMEOUT 100000
+#define TIMEOUT 50000
 
 using namespace std;
 
 static int width  = 1280;
 static int height = 768;
 static int port   = 9500;
-static string ip  = "192.168.1.132";
-static string ip2  = "192.168.1.129";
-static string ip3  = "127.0.0.1";
-static string ip4  = "10.1.135.153";
 
 static string path = "test.au3";
 static string pathJar = "sender.jar";
@@ -159,16 +155,16 @@ void handleImput(){
 				      addOpenProgramOrder("cmd");	
 				      break;
 				   case SDLK_F2:
-				      addOpenProgramOrder("Firefox");	
+				      addOpenProgramOrder("wordpad");	
 				      break;
 				   case SDLK_F3:
 				      addOpenProgramOrder("Chrome google.com");	
 				      break;
 				   case SDLK_F4:
-				      addOpenProgramOrder("Notepad++");	
+				      addOpenProgramOrder("Chrome gmail.com");	
 				      break;
 				   case SDLK_F5:
-				      addOpenProgramOrder("wordpad");	
+				      addSpecialKey("F5");
 				      break;
 
 				   case SDLK_F6:
@@ -176,15 +172,8 @@ void handleImput(){
 				      break;
 
 				   case SDLK_F7:
-				      addCommonKey("Soy Dios {ENTER}");	
+				      addCommonKey("^w");
 				      break;
-				   case SDLK_F8:
-				      addCommonKey("Juana...");	
-				      break;
-				   case SDLK_F9:
-				      addCommonKey("dame tu postre");	
-				      break;
-
 
 				   case SDLK_LEFT:
 				      addSpecialKey("LEFT");	

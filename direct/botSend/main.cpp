@@ -9,7 +9,7 @@
 
 #include "tcp.h"
 #define TAM 200
-#define TIMEOUT 100000
+#define TIMEOUT 50000
 
 using namespace std;
 
@@ -19,7 +19,7 @@ static int port   = 9500;
 static string ip  = "192.168.1.132";
 static string ip2  = "192.168.1.129";
 static string ip3  = "127.0.0.1";
-static string ip4  = "10.1.135.153";
+static string ip4  = "192.168.1.133";
 
 bool salir,shift,caps,mouseMoved = false;
 float x=0,y=0,timer = 0;
@@ -142,28 +142,21 @@ void handleImput(){
 				      sendOpenProgramOrder("cmd");	
 				      break;
 				   case SDLK_F2:
-				      sendOpenProgramOrder("Firefox");	
+				      sendOpenProgramOrder("wordpad");	
 				      break;
 				   case SDLK_F3:
-				      sendOpenProgramOrder("Chrome");	
+				      sendOpenProgramOrder("Chrome google.com");	
 				      break;
 				   case SDLK_F4:
-				      sendOpenProgramOrder("Notepad++");	
+				      sendOpenProgramOrder("Chrome gmail.com");	
 				      break;
 				   case SDLK_F5:
-				      sendOpenProgramOrder("wordpad");	
+				      sendSpecialKey("F5");
 				      break;
 
 				   case SDLK_F7:
-				      sendCommonKey("Soy Dios {ENTER}");	
+				      sendCommonKey("^w");
 				      break;
-				   case SDLK_F8:
-				      sendCommonKey("Juana...");	
-				      break;
-				   case SDLK_F9:
-				      sendCommonKey("dame tu postre");	
-				      break;
-
 
 				   case SDLK_LEFT:
 				      sendSpecialKey("LEFT");	
