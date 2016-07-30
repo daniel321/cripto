@@ -1,8 +1,5 @@
 SET recieveDir=C:\ProgramData\recieve
-SET usedStartupFolder=%HOMEDRIVE%%HOMEPATH%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-
-REM >xp:  SET usedStartupFolder=%HOMEDRIVE%%HOMEPATH%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-REM <=xp: SET usedStartupFolder=%HOMEDRIVE%%HOMEPATH%\Start Menu\Programs\Startup
+FOR /F "delims=" %%i IN ('cscript /nologo "%~dp0\get-startup.vbs"') DO SET usedStartupFolder=%%i
 
 taskkill.exe /F /IM javaw.exe
 DEL "%usedStartupFolder%\program.lnk"
